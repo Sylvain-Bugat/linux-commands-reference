@@ -27,3 +27,17 @@ checkUnixFile "sed 's/\r//'"
 #Delete all \r characters with nothing
 tr -d '\r' < windows-file.txt > unix-file.txt2
 checkUnixFile "tr -d '\r'"
+
+#Substitute all line ending \r characters with nothing
+awk ' /\r$/ { sub("\r$", "" ); print }' windows-file.txt > unix-file.txt
+checkUnixFile "awk ' /\r$/ { sub("\r$", "" ); print }'"
+#Equivalent with redirecting input
+awk ' /\r$/ { sub("\r$", "" ); print }' < windows-file.txt unix-file.txt
+checkUnixFile "awk ' /\r$/ { sub("\r$", "" ); print }'"
+
+#Substitute all line ending \r characters with nothing
+awk 'sub("\r$", "" )' windows-file.txt > unix-file.txt
+checkUnixFile "awk 'sub("\r$", "" )'"
+#Equivalent with redirecting input
+awk 'sub("\r$", "" )' < windows-file.txt > unix-file.txt
+checkUnixFile "awk 'sub("\r$", "" )'"
