@@ -41,3 +41,10 @@ checkUnixFile "awk 'sub("\r$", "" )'"
 #Equivalent with redirecting input
 awk 'sub("\r$", "" )' < windows-file.txt > unix-file.txt
 checkUnixFile "awk 'sub("\r$", "" )'"
+
+#Substitute all line ending CR (\r cannot be used) characters with nothing
+grep -o '^[^]*' windows-file.txt > unix-file.txt
+checkUnixFile "grep -o '^[^]*'"
+#Equivalent with redirecting input
+grep -o '^[^]*' < windows-file.txt > unix-file.txt
+checkUnixFile "grep -o '^[^]*'"
