@@ -15,17 +15,17 @@ function check_bash_version {
 	fi
 }
 
-function test_shell_chock {
+function test_shell_shock {
 
 	#Source of this command: http://thehackernews.com/2014/09/bash-shell-vulnerability-shellshock.html
 	env X="() { :;} ; echo VULNERABILITY" $( which bash ) -c "echo BASH"
 }
 
-function check_shell_chock {
+function check_shell_shock {
 
 	echo "testing bash bug/Shell Shock vulnerability"
-	typeset shell_chock=$( test_shell_chock 2>/dev/null )
-	if [[ "${shell_chock}" = "BASH" ]]
+	typeset shell_shock=$( test_shell_shock 2>/dev/null )
+	if [[ "${shell_shock}" = "BASH" ]]
 	then
 		echo "This system is not vulnerable to bash bug/Shell shock"
 	else
@@ -36,4 +36,4 @@ function check_shell_chock {
 #Print the used BASH and the version
 check_bash_version
 #Test bash bug/shell shock command injection
-check_shell_chock
+check_shell_shock
