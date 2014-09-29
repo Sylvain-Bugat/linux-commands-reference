@@ -48,3 +48,8 @@ checkUnixFile "grep -o '^[^]*'"
 #Equivalent with redirecting input
 grep -o '^[^]*' < windows-file.txt > unix-file.txt
 checkUnixFile "grep -o '^[^]*'"
+
+#Substitute all line ending \r characters with nothing
+perl -p -e 's/\r$//' windows-file.txt > unix-file.txt
+#Equivalent with redirecting input
+perl -p -e 's/\r$//' < windows-file.txt > unix-file.txt
