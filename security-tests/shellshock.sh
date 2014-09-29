@@ -29,8 +29,10 @@ function check_shell_shock {
 	if [[ "${shell_shock}" = "BASH" ]]
 	then
 		echo -e "\033[32mThis system is not vulnerable to bash bug/Shell shock\033[0m"
+		return 0
 	else
 		echo -e "\033[31mThis system is vulnerable to bash bug/Shell shock, BASH must be updated with a fixed version\033[0m"
+		return 1
 	fi
 }
 
@@ -38,3 +40,4 @@ function check_shell_shock {
 check_bash_version
 #Test bash bug/shell shock command injection
 check_shell_shock
+return $?
