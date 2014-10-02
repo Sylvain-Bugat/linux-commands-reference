@@ -10,9 +10,16 @@ function checkSelectedLines {
 	fi
 }
 
-#Substitute all line ending \r characters with nothing
+#Select only lines 1 to 15
 head -15 input-file.txt > selected-lines.txt
 checkSelectedLines "head -15"
 #Equivalent with redirecting input
 head -15 < input-file.txt > selected-lines.txt
 checkSelectedLines "head -15"
+
+#Select only lines 1 to 15
+sed -n '1,15p' input-file.txt > selected-lines.txt
+checkSelectedLines "sed -n '1,15p'"
+#Equivalent with redirecting input
+sed -n '1,15p' < input-file.txt > selected-lines.txt
+checkSelectedLines "sed -n '1,15p'"
