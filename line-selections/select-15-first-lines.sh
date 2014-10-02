@@ -18,6 +18,20 @@ head -15 < input-file.txt > selected-lines.txt
 checkSelectedLines "head -15"
 
 #Select only lines 1 to 15
+head -n 15 input-file.txt > selected-lines.txt
+checkSelectedLines "head -n 15"
+#Equivalent with redirecting input
+head -n 15 < input-file.txt > selected-lines.txt
+checkSelectedLines "head -n 15"
+
+#Select only lines 1 to 15
+head -n +15 input-file.txt > selected-lines.txt
+checkSelectedLines "head -n +15"
+#Equivalent with redirecting input
+head -n +15 < input-file.txt > selected-lines.txt
+checkSelectedLines "head -n +15"
+
+#Select only lines 1 to 15
 sed -n '1,15p' input-file.txt > selected-lines.txt
 checkSelectedLines "sed -n '1,15p'"
 #Equivalent with redirecting input
@@ -30,3 +44,10 @@ checkSelectedLines "awk 'NR <= 15 { print $0 }'"
  #Equivalent with redirecting input
 awk 'NR <= 15 { print $0 }' < input-file.txt > selected-lines.txt
 checkSelectedLines "awk 'NR <= 15 { print $0 }'"
+
+#Select only lines 1 to 15
+awk '{ if( NR <= 15 ) print $0 }' input-file.txt > selected-lines.txt
+checkSelectedLines "awk '{ if( NR <= 15 ) print $0 }'"
+ #Equivalent with redirecting input
+awk '{ if( NR <= 15 ) print $0 }' < input-file.txt > selected-lines.txt
+checkSelectedLines "awk '{ if( NR <= 15 ) print $0 }'"
