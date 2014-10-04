@@ -66,7 +66,7 @@ checkSelectedLines "awk 'NR == 15 { print $0 ; exit } { print $0 }'"
 awk 'NR == 15 { print $0 ; exit } { print $0 }' < input-file.txt > selected-lines.txt
 checkSelectedLines "awk 'NR == 15 { print $0 ; exit } { print $0 }'"
 
-#Sheel scripted select only lines 1 to 15
+#Shell scripted select only lines 1 to 15
 typeset -i lineNumber=0
 > selected-lines.txt
 while read line
@@ -79,3 +79,13 @@ do
 	fi
 done < input-file.txt
 checkSelectedLines "while read line ... break"
+
+#Shell scripted select only lines 1 to 15
+exec 3< input-file.txt
+> selected-lines.txt
+for lineNumber in $( seq 15 )
+do
+    read line <&3
+    echo -E "${line}" >> selected-lines.txt
+done
+checkSelectedLines "for read line"
