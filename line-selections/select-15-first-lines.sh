@@ -58,3 +58,24 @@ checkSelectedLines "awk '{ if( NR <= 15 ) print $0 }'"
  #Equivalent with redirecting input
 awk '{ if( NR <= 15 ) print $0 }' < input-file.txt > selected-lines.txt
 checkSelectedLines "awk '{ if( NR <= 15 ) print $0 }'"
+
+#Select only lines 1 to 15
+awk 'NR == 15 { print $0 ; exit } { print $0 }' input-file.txt > selected-lines.txt
+checkSelectedLines "awk 'NR == 15 { print $0 ; exit } { print $0 }'"
+ #Equivalent with redirecting input
+awk 'NR == 15 { print $0 ; exit } { print $0 }' < input-file.txt > selected-lines.txt
+checkSelectedLines "awk 'NR == 15 { print $0 ; exit } { print $0 }'"
+
+#Sheel scripted select only lines 1 to 15
+typeset -i lineNumber=0
+> selected-lines.txt
+while read line
+do
+	echo -E "${line}" >> selected-lines.txt
+	(( lineNumber ++ ))
+	if [[ ${lineNumber} -ge 15 ]]
+	then
+		break
+	fi
+done < input-file.txt
+checkSelectedLines "while read line ... break"
