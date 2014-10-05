@@ -1,7 +1,7 @@
 # Select the first N lines of a file
 ***
 ## with head command
-| Comlexity::white_check_mark: | Efficiency::white_check_mark: |
+| Complexity::white_check_mark: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
 **The classic method**:
 ```bash
@@ -25,7 +25,7 @@ cat <file> | head -n 15
 All the content of the file is read and passed into the pipe **|** and another process is created for the `cat` command.
 
 ## with sed command
-| Comlexity::warning::warning: | Efficiency::white_check_mark: |
+| Complexity::warning: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
 Sed stop reading the input and exit when the 15th line is reached.
 ```bash
@@ -41,3 +41,28 @@ sed -n '1,15p' <file>
 sed '1,15!d' <file>
 ```
 All the content of the file is read by the `sed` command.
+
+## with awk command
+| Complexity::warning: | Efficiency::white_check_mark: |
+| ---------- | ---------- |
+Awk stop reading the input and exit when the 15th line is reached.
+```bash
+awk 'NR > 15 { exit } { print $0 }' <file>
+```
+Syntax variants:
+```bash
+awk '{ print $0 ; if( NR >= 15 ) exit }' <file>
+awk '{ if( NR > 15 ) exit ; print $0 }' <file>
+awk '{ if( NR > 15 ) { exit } print $0 }' <file>
+awk 'NR >= 15 { print $0 ; exit } { print $0 }' <file>
+```
+Input variant:
+```bash
+awk 'NR >= 15 { print $0 ; exit } { print $0 }' < <file>
+```
+Unefficient variants:
+```bash
+awk 'NR <= 15 { print $0 }' <file>
+awk '{ if( NR <= 15 ) print $0 }' <file>
+```
+All the content of the file is read by the `awk` command.
