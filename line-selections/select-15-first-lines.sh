@@ -85,7 +85,23 @@ do
 		break
 	fi
 done < input-file.txt
-checkSelectedLines "while read line ... break"
+checkSelectedLines "while read line ... break ... done < input-file.txt"
+
+#Shell scripted select only lines 1 to 15
+typeset -i lineNumber=0
+> selected-lines.txt
+exec 3< input-file.txt
+while read line <&3
+do
+	echo -E "${line}" >> selected-lines.txt
+	(( lineNumber ++ ))
+	if [[ ${lineNumber} -ge 15 ]]
+	then
+		break
+	fi
+done
+exec 3<&- 
+checkSelectedLines "while read line < &3... break ... done"
 
 #Shell scripted select only lines 1 to 15
 exec 3< input-file.txt
