@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -o history
+
+#Number of first lines to select (limit included)
+typeset -ir selectedLines=15
+
+#make a reference file based on the most common command
+head -${selectedLines} input-file.txt > ref-selected-lines.txt
 
 function checkSelectedLines {
 
@@ -11,11 +18,11 @@ function checkSelectedLines {
 }
 
 #Select only lines 1 to 15
-head -15 input-file.txt > selected-lines.txt
-checkSelectedLines "head -15"
+head -${selectedLines} input-file.txt > selected-lines.txt
+checkSelectedLines "$( fc -rnl | sed '2!d' )"
 #Equivalent with redirecting input
 head -15 < input-file.txt > selected-lines.txt
-checkSelectedLines "head -15"
+checkSelectedLines $( fc -rnl | sed '2!d' )
 
 #Select only lines 1 to 15
 head -n 15 input-file.txt > selected-lines.txt
