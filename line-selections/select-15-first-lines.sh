@@ -48,23 +48,30 @@ checkSelectedLines "sed '15q'"
 #Select only lines 1 to 15
 awk 'NR <= 15 { print $0 }' input-file.txt > selected-lines.txt
 checkSelectedLines "awk 'NR <= 15 { print $0 }'"
- #Equivalent with redirecting input
+#Equivalent with redirecting input
 awk 'NR <= 15 { print $0 }' < input-file.txt > selected-lines.txt
 checkSelectedLines "awk 'NR <= 15 { print $0 }'"
 
 #Select only lines 1 to 15
 awk '{ if( NR <= 15 ) print $0 }' input-file.txt > selected-lines.txt
 checkSelectedLines "awk '{ if( NR <= 15 ) print $0 }'"
- #Equivalent with redirecting input
+#Equivalent with redirecting input
 awk '{ if( NR <= 15 ) print $0 }' < input-file.txt > selected-lines.txt
 checkSelectedLines "awk '{ if( NR <= 15 ) print $0 }'"
 
 #Select only lines 1 to 15
 awk 'NR == 15 { print $0 ; exit } { print $0 }' input-file.txt > selected-lines.txt
 checkSelectedLines "awk 'NR == 15 { print $0 ; exit } { print $0 }'"
- #Equivalent with redirecting input
+#Equivalent with redirecting input
 awk 'NR == 15 { print $0 ; exit } { print $0 }' < input-file.txt > selected-lines.txt
 checkSelectedLines "awk 'NR == 15 { print $0 ; exit } { print $0 }'"
+
+#Select only lines 1 to 15
+perl -ne '1..15 and print' input-file.txt > selected-lines.txt
+checkSelectedLines "perl -ne '1..15 and print'"
+#Equivalent with redirecting input
+perl -ne '1..15 and print' < input-file.txt > selected-lines.txt
+checkSelectedLines "perl -ne '1..15 and print'"
 
 #Shell scripted select only lines 1 to 15
 typeset -i lineNumber=0
@@ -88,4 +95,5 @@ do
     read line <&3
     echo -E "${line}" >> selected-lines.txt
 done
+exec 3<&-
 checkSelectedLines "for read line"
