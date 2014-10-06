@@ -26,7 +26,7 @@ do
 	echo "Executing: ${executedCommand}"
 	eval "${line}" > "${targetFile}"
 	checkSelectedLines "${executedCommand}"
-done < select-N-first-lines.lst
+done < select-N-first-lines-commands.sh
 
 #Shell scripted variant to select only lines 1 to N
 typeset -i lineNumber=0
