@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-alias lastcommand="fc -rnl | sed '2!d'"
+
+if [[ "${#}" -ge 1 && "${1}" != [0-9]* ]]
+then
+	echo "Usage: $0 <number of lines>"
+	exit 2
+fi
 
 #Number of first lines to select (limit included)
 typeset -ir selectedLines="${1:-15}"
