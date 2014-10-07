@@ -36,6 +36,12 @@ function test_shell_shock_cve_2014_7169 {
 	return 0
 }
 
+#CVE-2014-7187
+function test_shell_shock_cve_2014_7187 {
+
+	(for x in {1..200} ; do echo "for x$x in ; do :"; done; for x in {1..200} ; do echo done ; done) | bash || echo "VULNERABILITY"
+}
+
 function check_shell_shock {
 
 	typeset check_return=0
@@ -60,6 +66,15 @@ function check_shell_shock {
 		check_return=1
 	fi
 
+	shell_shock=$( test_shell_shock_cve_2014_7187 2>/dev/null )
+	if [[ -z "${shell_shock}" ]]
+	then
+		echo -e "\033[32mThis system is not vulnerable to shell shock CVE-2014-7187\033[0m"
+	else
+		echo -e "\033[31mThis system is vulnerable to shell shock CVE-2014-7187, BASH must be updated with a fixed version\033[0m"
+		check_return=1
+	fi
+
 	return "${check_return}"
 }
 
@@ -68,3 +83,4 @@ check_bash_version
 #Test bash bug/shell shock command injection
 check_shell_shock
 exit $?
+
