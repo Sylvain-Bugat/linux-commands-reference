@@ -9,9 +9,19 @@ function check_bash_version {
 	#test if the version is vulnerable
 	if [[ "${version}" < "4.3" && "${version}" > "1.14" ]]
 	then
-		echo -e "\033[33mThis version may be vulnerable to bash bug/Shell Shock\033[0m"
+		echo -e "\033[33mThis version may be vulnerable to Shell Shock\033[0m"
 	else
-		echo -e "\033[32mThis version is not vulnerable to bash bug/Shell Shock\033[0m"
+		echo -e "\033[32mThis version is not vulnerable to Shell Shock\033[0m"
+	fi
+	typeset shellVersion=$( /bin/sh --version 2>/dev/null | head -1 | sed 's/^.* version //')
+	if [[ $? -ne 0 ]]
+	then
+		echo -e "\033[32m/bin/sh is not --version shell\033[0m"
+	elif [[ "${version}" = "${shellVersion}" ]]
+	then
+		echo -e "\033[33m/bin/sh is a bash shell which may be vulnerable to Shell Shock\033[0m"
+	else 
+		echo -e "\033[32m/bin/sh is not a bash shell\033[0m"
 	fi
 }
 
@@ -83,4 +93,3 @@ check_bash_version
 #Test bash bug/shell shock command injection
 check_shell_shock
 exit $?
-
