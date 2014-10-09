@@ -19,3 +19,5 @@ sed -e "${firstSelectedLine},${lastSelectedLine}!d" -e "${lastSelectedLine}q" < 
 sed -e "${firstSelectedLine},${lastSelectedLine}!d" -e "${lastSelectedLine}q" < "${sourceFile}"
 awk 'NR >= '"${firstSelectedLine}"' && NR <='"${lastSelectedLine}"' { print $0 }' "${sourceFile}"
 awk 'NR >= '"${firstSelectedLine}"' && NR <='"${lastSelectedLine}"' { print $0 }' < "${sourceFile}"
+awk 'NR >= '"${firstSelectedLine}"' && NR <'"${lastSelectedLine}"' { print $0 } NR =='"${lastSelectedLine}"' { print $0 ; exit }' "${sourceFile}"
+awk 'NR >= '"${firstSelectedLine}"' && NR <'"${lastSelectedLine}"' { print $0 } NR =='"${lastSelectedLine}"' { print $0 ; exit }' < "${sourceFile}"
