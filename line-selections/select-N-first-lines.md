@@ -66,3 +66,22 @@ awk 'NR <= 15 { print $0 }' <file>
 awk '{ if( NR <= 15 ) print $0 }' <file>
 ```
 All the content of the file is read by the `awk` command.
+
+## with shell scripting
+| Complexity::warning: | Efficiency::warning: |
+| ---------- | ---------- |
+
+Loop and read one line of the file and print it within the `while`, exit the when the 15th line is reached.
+```bash
+typeset -i lineNumber=0
+while read line
+do
+	echo -E "${line}"
+	(( lineNumber ++ ))
+	if [[ "${lineNumber}" -ge 15 ]]
+	then
+		break
+	fi
+done < <file>
+```
+Interpreted shell script is less efficient than a single command
