@@ -28,7 +28,6 @@ All the content of the file is read and passed into the pipe **|** and another p
 | Complexity::warning: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
 
-Sed stop reading the input and exit when the 15th line is reached.
 ```bash
 head -n 15 <file> | tail -n +5
 ```
@@ -42,8 +41,29 @@ Input variant:
 ```bash
 head -n 15 < <file> | tail -n +5
 ```
-Unefficient variants:
+Unefficient variant:
 ```bash
 cat <file> | head -n 15 | tail -n +5
 ```
 All the content of the file is read and passed into the pipe **|** and another process is created for the `cat` command.
+
+## with sed command
+| Complexity::warning: | Efficiency::warning: |
+| ---------- | ---------- |
+
+```bash
+sed -n -e "5,15p" -e "15q" <file>
+```
+Argument syntax variants:
+```bash
+sed -e "5,15!d" -e "15q" <file>
+```
+Input variant:
+```bash
+sed -n -e "5,15p" -e "15q" < <file>
+```
+Unefficient variant:
+```bash
+sed -n "5,15p" <file>
+sed "5,15!d" <file>
+```
