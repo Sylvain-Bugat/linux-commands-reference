@@ -48,7 +48,7 @@ cat <file> | head -n 15 | tail -n +5
 All the content of the file is read and passed into the pipe **|** and another process is created for the `cat` command.
 
 ## with sed command
-| Complexity::warning: | Efficiency::warning: |
+| Complexity::warning: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
 
 ```bash
@@ -62,8 +62,35 @@ Input variant:
 ```bash
 sed -n -e "5,15p" -e "15q" < <file>
 ```
-Unefficient variant:
+Unefficient variants:
 ```bash
 sed -n "5,15p" <file>
 sed "5,15!d" <file>
 ```
+All the content of the file is read by the `sed` command.
+
+## with awk command
+| Complexity::warning: | Efficiency::white_check_mark: |
+| ---------- | ---------- |
+
+```bash
+awk 'NR >= 5 { print $0 } NR >= 15 { print $0 ; exit }' <file>
+```
+Argument syntax variants:
+```bash
+awk 'NR >= 5 { print $0 } NR == 15 { print $0 ; exit }' <file>
+awk 'NR >= 5 && NR <=15 { print $0 } NR > 15 { exit }' <file>
+awk 'NR == 15 { print $0 ; exit } NR >= 5 { print $0 } ' <file>
+awk 'NR >= 15 { print $0 ; exit } NR >= 5 { print $0 } ' <file>
+awk 'NR >= 5 && NR <15 { print $0 } NR ==15 { print $0 ; exit }' <file>
+awk 'NR >= 5 && NR <15 { print $0 } NR >=15 { print $0 ; exit }' <file>
+```
+Input variant:
+```bash
+awk 'NR >= 5 { print $0 } NR >= 15 { print $0 ; exit }' < <file>
+```
+Unefficient variants:
+```bash
+awk 'NR >= 5 && NR <=15 { print $0 }' <file>
+```
+All the content of the file is read by the `awk` command.
