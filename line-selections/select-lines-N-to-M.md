@@ -1,4 +1,4 @@
-# Select the first N lines of a file
+# Select the lines N to M in a file
 ***
 ## with head and tail - commands
 | Complexity::white_check_mark: | Efficiency::white_check_mark: |
