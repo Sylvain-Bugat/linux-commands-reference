@@ -3,7 +3,9 @@
 ## with cut command
 | Complexity::white_check_mark: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
-**The classic method**:
+**The classic method**:  
+
+:warning:: multiple consecutive separators will count as multiple separators with empty fields! Column fixed output needs a pre-process with the ```bash tr -s ``` command.
 ```bash
 cut -d ';' -f 2 <file>
 ```
@@ -20,6 +22,7 @@ cut -d';' -f2 < <file>
 | Complexity::white_check_mark: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
 
+:warning:: multiple consecutive separators will count as one separator! Column fixed output can be easyly processed with awk but really empty field will shift output fields.
 ```bash
 awk -F ';' '{ print $2 }' <file>
 ```
