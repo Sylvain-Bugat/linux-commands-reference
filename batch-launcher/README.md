@@ -1,11 +1,16 @@
 # Batch launcher
 ***
-Th batch launcher or [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) is the first line of a script file that describe the interpreter to use (bash, ksh, awk, etc.).  
+Th batch launcher or [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) is the first line of a script file that describe the interpreter to use (bash, ksh, awk, etc.).
+
 Example:
 ```bash
 #!/bin/bash
 ```
-:warning: The file must be in UNIX/Linux format with \r to mark end-of-line. Otherwise the interpreter ```/bin/bash\r``` will not be found on the system and the script will not be executed.
+:warning: The path to the used interpreter must be absolute!  
+:warning: The file must be in UNIX/Linux format with \r to mark end-of-line. Otherwise the interpreter
+```/bin/bash\r``` will not be found on the system and the script will not be executed.
+:warning: UTF BOM are forbidden in shell script because they insert caracters before the shebang!  
+```0xEF 0xBB 0xBF!/bin/bash``` will not be executed because of 3 BOM caracters (UTF-8 example).
 
 ## Using absolute path
 **The classic method**:
