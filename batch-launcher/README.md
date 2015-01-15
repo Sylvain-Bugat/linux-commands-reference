@@ -6,9 +6,9 @@ Example:
 ```bash
 #!/bin/bash
 ```
-:warning: The path to the used interpreter must be absolute!  
-:warning: The file must be in UNIX/Linux format with \r to mark end-of-line. Otherwise the interpreter
-```/bin/bash\r``` will not be found on the system and the script will not be executed.
+:warning: The path to the used command must be absolute!  
+:warning: The file must be in UNIX/Linux format with \r to mark end-of-line. Otherwise the command
+```/bin/bash\r``` will not be found on the system and the script will not be executed.  
 :warning: UTF BOM are forbidden in shell script because they insert caracters before the shebang!  
 ```0xEF 0xBB 0xBF!/bin/bash``` will not be executed because of 3 BOM caracters (UTF-8 example).
 
@@ -17,9 +17,9 @@ Example:
 ```bash
 #!/bin/bash
 ```
-Options can be passed to the used interpreter:
+Options can be passed to the used command:
 ```bash
-#!/bin/bash -x
+#!/bin/bash -i
 ```
 
 Shebang examples:
