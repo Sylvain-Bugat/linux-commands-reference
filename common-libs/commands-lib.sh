@@ -72,7 +72,7 @@ function testCommands {
 
 	#Map arguements as argX
 	typeset -i argNumber=1
-	for arg in "${*}"
+	for arg in ${*}
 	do
 		eval arg${argNumber}="'${arg}'"
 		(( argNumber ++ ))
@@ -81,7 +81,7 @@ function testCommands {
 	#List one-line commands to execute and test
 	while read line
 	do
-		executedCommand=$( printExecutedCommand "${line}" "${sourceFile}" "${*}")
+		executedCommand=$( printExecutedCommand "${line}" "${sourceFile}" ${*})
 		echo "Executing: ${executedCommand}"
 		eval "${line}" > "${targetFile}"
 		checkGeneratedFile "${executedCommand}" "${refTargetFile}" "${targetFile}"
