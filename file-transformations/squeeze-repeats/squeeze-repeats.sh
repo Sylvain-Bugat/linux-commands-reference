@@ -10,8 +10,8 @@ fi
 #Source commands library
 . ../../common-libs/commands-lib.sh
 
-#Character to squeeze, default: space
-typeset -r squeezeCharacter="${1:- }"
+#Character to squeeze, default: a
+typeset -r squeezeCharacter="${1:-a}"
 
 #make a reference file based on the most common command
 tr -s "'${squeezeCharacter}'" < "${sourceFile}" > "${refTargetFile}"
