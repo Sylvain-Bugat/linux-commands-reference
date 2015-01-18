@@ -84,4 +84,16 @@ do
 	fi
 done < <file>
 ```
-Interpreted shell script is less efficient than a single command
+Interpreted shell script is less efficient than a single command.
+
+Script variant:
+```bash
+exec 3< <file>
+typeset -i lineNumber=0
+for lineNumber in $( seq 15 )
+do
+    read line <&3
+    echo -E "${line}"
+done
+exec 3<&-
+```
