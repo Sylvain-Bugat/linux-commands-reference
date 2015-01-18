@@ -51,7 +51,7 @@ function printExecutedCommand {
 	typeset -i argNumber=1
 	while [[ ! -z "${1}" ]]
 	do
-		executedCommand=$( echo "${executedCommand}" | sed -e 's/'\''"${arg'"${argNumber}"'}"'\''/'"${1}"'/g' -e 's/'\''${arg'"${argNumber}"'}'\''/'"${1}"'/g' )
+		executedCommand=$( echo "${executedCommand}" | sed -e 's/'\''"${arg'"${argNumber}"'}"'\''/'"${1}"'/g' -e 's/"${arg'"${argNumber}"'}"/'"${1}"'/g' -e 's/'\''${arg'"${argNumber}"'}'\''/'"${1}"'/g' )
 		shift
 		(( argNumber ++ ))
 	done
