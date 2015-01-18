@@ -1,37 +1,23 @@
 #!/usr/bin/env bash
 
-if [[ "${#}" -ge 1 && "${1}" != [0-9]* ]]
+#Check arguments
+if [[ "${#}" -ge 1 && "${#1}" -ne 1 ]]
 then
 	echo "Usage: $0 <number of lines>"
 	exit 2
 fi
 
-#Number of first lines to select (limit included)
+#Source commands library
+. ../../common-libs/commands-lib.sh
+
+#Character to squeeze, default: space
 typeset -ir selectedLines="${1:-15}"
-typeset -r sourceFile="input-file.txt"
-typeset -r targetFile="selected-lines.txt"
 
 #make a reference file based on the most common command
-head -${selectedLines} input-file.txt > ref-selected-lines.txt
+head -${selectedLines} "${sourceFile}" > "${refTargetFile}"
 
-function checkSelectedLines {
-
-	cmp ref-selected-lines.txt selected-lines.txt
-	if [[ ${?} -ne 0 ]]
-	then
-		echo "Error checking file after $1" 1>&2
-		exit 1
-	fi
-}
-
-#List one-line commands to execute and test
-while read line
-do
-	executedCommand=$( echo "${line}" | sed -e 's/"${selectedLines}"/'"${selectedLines}"'/g' -e 's/"${sourceFile}"/'"${sourceFile}"'/g' )
-	echo "Executing: ${executedCommand}"
-	eval "${line}" > "${targetFile}"
-	checkSelectedLines "${executedCommand}"
-done < select-N-first-lines-commands.sh
+#Test all commands
+testCommands "${selectedLines}"
 
 #Shell scripted variant to select only lines 1 to N
 typeset -i lineNumber=0
@@ -45,7 +31,7 @@ do
 		break
 	fi
 done < "${sourceFile}"
-checkSelectedLines "while read line ... break ... done < input-file.txt"
+checkGeneratedFile "while read line ... break ... done < input-file.txt" "${refTargetFile}" "${targetFile}"
 
 #Shell scripted variant to select only lines 1 to N
 typeset -i lineNumber=0
@@ -61,7 +47,7 @@ do
 	fi
 done
 exec 3<&- 
-checkSelectedLines "while read line < &3... break ... done"
+checkGeneratedFile "while read line < &3... break ... done" "${refTargetFile}" "${targetFile}"
 
 #Shell scripted variant to select only lines 1 to N
 exec 3< "${sourceFile}"
@@ -72,4 +58,4 @@ do
     echo -E "${line}" >> "${targetFile}"
 done
 exec 3<&-
-checkSelectedLines "for read line"
+checkGeneratedFile "for read line" "${refTargetFile}" "${targetFile}"
