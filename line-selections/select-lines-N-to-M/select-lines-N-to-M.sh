@@ -20,3 +20,62 @@ head -n "${lastSelectedLine}" "${sourceFile}" | tail -n $(( lastSelectedLine - f
 
 #Test all commands
 testCommands "${firstSelectedLine}" "${lastSelectedLine}"
+
+#Shell scripted variant to select only lines N to M
+typeset -i lineNumber=0
+> "${targetFile}"
+while read line
+do
+	(( lineNumber ++ ))
+	if [[ "${lineNumber}" -lt "${firstSelectedLine}" ]]
+	then
+		continue
+	fi
+
+	echo -E "${line}" >> "${targetFile}"
+
+	if [[ "${lineNumber}" -ge "${lastSelectedLine}" ]]
+	then
+		break
+	fi
+done < "${sourceFile}"
+checkGeneratedFile "while read line ... continue/break ... done < <file>" "${refTargetFile}" "${targetFile}"
+
+#Shell scripted variant to select only lines N to M
+typeset -i lineNumber=0
+> "${targetFile}"
+exec 3< "${sourceFile}"
+while read line <&3
+do
+	(( lineNumber ++ ))
+	if [[ "${lineNumber}" -lt "${firstSelectedLine}" ]]
+	then
+		continue
+	fi
+
+	echo -E "${line}" >> "${targetFile}"
+
+	if [[ "${lineNumber}" -ge "${lastSelectedLine}" ]]
+	then
+		break
+	fi
+done
+exec 3<&- 
+checkGeneratedFile "while read line < &3... continue/break ... done" "${refTargetFile}" "${targetFile}"
+
+#Shell scripted variant to select only lines N to M
+exec 3< "${sourceFile}"
+> "${targetFile}"
+for lineNumber in $( seq "${lastSelectedLine}" )
+do
+	read line <&3
+
+	if [[ "${lineNumber}" -lt "${firstSelectedLine}" ]]
+	then
+		continue
+	fi
+
+	echo -E "${line}" >> "${targetFile}"
+done
+exec 3<&-
+checkGeneratedFile "for read line ... continue ... echo" "${refTargetFile}" "${targetFile}"
