@@ -54,8 +54,8 @@ exec 3< "${sourceFile}"
 > "${targetFile}"
 for lineNumber in $( seq "${selectedLines}" )
 do
-    read line <&3
-    echo -E "${line}" >> "${targetFile}"
+	read line <&3
+	echo -E "${line}" >> "${targetFile}"
 done
 exec 3<&-
 checkGeneratedFile "for read line" "${refTargetFile}" "${targetFile}"
