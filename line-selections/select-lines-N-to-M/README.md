@@ -94,3 +94,46 @@ Unefficient variants:
 awk 'NR >= 5 && NR <=15 { print $0 }' <file>
 ```
 All the content of the file is read by the `awk` command.
+
+## with shell scripting
+| Complexity::warning: | Efficiency::warning: |
+| ---------- | ---------- |
+
+Loop and read one line of the file and print it within the `while`, ignore the 4 firt lines and exit the when the 15th line is reached.
+```bash
+typeset -i lineNumber=0
+while read line
+do
+	(( lineNumber ++ ))
+	if [[ "${lineNumber}" -lt 5 ]]
+	then
+		continue
+	fi
+
+	echo -E "${line}"
+	(( lineNumber ++ ))
+	if [[ "${lineNumber}" -ge 15 ]]
+	then
+		break
+	fi
+done < <file>
+```
+Interpreted shell script is less efficient than a single command.
+
+Script variant:
+```bash
+exec 3< <file>
+typeset -i lineNumber=0
+for lineNumber in $( seq 15 )
+do
+	read line <&3
+
+  if [[ "${lineNumber}" -lt 5 ]]
+	then
+		continue
+	fi
+
+	echo -E "${line}"
+done
+exec 3<&-
+```
