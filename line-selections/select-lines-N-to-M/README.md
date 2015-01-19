@@ -99,7 +99,7 @@ All the content of the file is read by the `awk` command.
 | Complexity::warning: | Efficiency::warning: |
 | ---------- | ---------- |
 
-Loop and read one line of the file and print it within the `while`, ignore the 4 firt lines and exit the when the 15th line is reached.
+Loop and read one line of the file and print it within the `while`, ignore the 4 first lines and exit the when the 15th line is reached.
 ```bash
 typeset -i lineNumber=0
 while read line
@@ -120,7 +120,7 @@ done < <file>
 ```
 Interpreted shell script is less efficient than a single command.
 
-Script variant:
+Script variant using a file descriptor opened on the input file:
 ```bash
 exec 3< <file>
 typeset -i lineNumber=0
