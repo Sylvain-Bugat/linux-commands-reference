@@ -10,7 +10,7 @@ Example:
 :warning: The file must be in UNIX/Linux format with \r to mark end-of-line. Otherwise the command
 ```/bin/bash\r``` will not be found on the system and the script will not be executed.  
 :warning: UTF BOM are forbidden in shell script because they insert caracters before the shebang!  
-```0xEF 0xBB 0xBF!/bin/bash``` will not be executed because of 3 BOM caracters (UTF-8 example).
+```0xEF 0xBB 0xBF!/bin/bash``` will not be executed because of 3 BOM characters (UTF-8 hexadecimal example).
 
 ## Using absolute path
 **The classic method**:
@@ -37,6 +37,7 @@ The intrepreter to use is passed as argument of the ```env``` command and will b
 #!/usr/bin/env bash
 ```
 :warning: Options cannot be passed to the used interpreter on Linux.
+:warning: ```env``` command path must be absolute!
 
 Shebang examples:
 ```bash
