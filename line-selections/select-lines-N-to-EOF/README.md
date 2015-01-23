@@ -1,5 +1,9 @@
 # Select the lines N to EOF in a file
 ***
+Classic use-cases:  
+**Filter the first line (header) of a file (csv, etc.)**  
+**Filter the first line (header) of a command output (ls -l, etc.)**
+
 ## with tail command
 | Complexity::white_check_mark: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
