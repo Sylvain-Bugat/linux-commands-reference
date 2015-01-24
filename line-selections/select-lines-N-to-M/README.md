@@ -1,5 +1,9 @@
 # Select the lines N to M in a file
 ***
+Classic use-cases:  
+**Get some fixed lines part of a file**  
+**Get lines 2 to 11 of a command output to exclude a header line ( ls -lt, etc.)**
+
 ## with head and tail - commands
 | Complexity::white_check_mark: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
