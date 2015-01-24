@@ -1,5 +1,9 @@
 # Select the first N lines of a file
 ***
+Classic use-cases:  
+**Get the first line (header) of a file (csv, etc.)**  
+**Get 10 first lines of a command output ( ls -lt, etc.)**
+
 ## with head command
 | Complexity::white_check_mark: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
