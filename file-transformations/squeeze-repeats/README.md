@@ -1,5 +1,8 @@
 # Squeeze repeated characters
 ***
+Classic use-cases:  
+**Preprocess formatted output before cut command (ls -l | tr -s ' ' | cut -f 2, etc.)**  
+
 ## with tr command
 | Complexity::white_check_mark: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
