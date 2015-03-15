@@ -9,6 +9,9 @@ typeset targetFile="output-file.txt"
 typeset -r referenceFilePrefix="ref-"
 typeset refTargetFile="${referenceFilePrefix}${targetFile}"
 
+#Constant
+typeset -r EXECUTING="Executing:"
+
 #------------------------------------------------------
 #
 # Check the generated file by comparing it with an expected file
@@ -84,7 +87,7 @@ function testCommands {
 	while read line
 	do
 		executedCommand=$( printExecutedCommand "${line}" "${sourceFile}" ${*})
-		echo -n "Executing: ${executedCommand}"
+		echo -n "${EXECUTING} ${executedCommand}"
 		eval "${line}" > "${targetFile}"
 		checkGeneratedFile "${executedCommand}" "${refTargetFile}" "${targetFile}"
 	done < "${commandsShell}"
