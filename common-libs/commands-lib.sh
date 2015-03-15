@@ -27,8 +27,10 @@ function checkGeneratedFile {
 	cmp "${expectedFile}" "${generatedFile}"
 	if [[ ${?} -ne 0 ]]
 	then
-		echo "Error checking file after ${executedCommand}" 1>&2
+		echo -e " [\033[31mKO\033[0m]" 1>&2
 		exit 1
+	else
+		echo -e " [\033[32mOK\033[0m]" 1>&2
 	fi
 }
 
@@ -82,7 +84,7 @@ function testCommands {
 	while read line
 	do
 		executedCommand=$( printExecutedCommand "${line}" "${sourceFile}" ${*})
-		echo "Executing: ${executedCommand}"
+		echo -n "Executing: ${executedCommand}"
 		eval "${line}" > "${targetFile}"
 		checkGeneratedFile "${executedCommand}" "${refTargetFile}" "${targetFile}"
 	done < "${commandsShell}"
