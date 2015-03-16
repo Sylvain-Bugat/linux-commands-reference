@@ -45,7 +45,6 @@ script="while true ... read line <&3 ... done"
 echo -n "${EXECUTING} ${script}"
 typeset -i lineNumber=0
 exec 3< "${sourceFile}"
-> "${targetFile}"
 while true
 do
 	read line <&3
