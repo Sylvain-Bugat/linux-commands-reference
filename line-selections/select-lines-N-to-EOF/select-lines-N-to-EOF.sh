@@ -53,7 +53,7 @@ exec 3<&-
 checkGeneratedFile "while read line < &3... continue ... done" "${refTargetFile}" "${targetFile}"
 
 #Shell scripted variant to select only lines N to EOF
-typeset -ir fileLength=$( wc -l ${sourceFile} | awk '{ print $1 }' )
+typeset -ir fileLength=$( wc -l < ${sourceFile} )
 exec 3< "${sourceFile}"
 > "${targetFile}"
 for lineNumber in $( seq "${fileLength}" )
