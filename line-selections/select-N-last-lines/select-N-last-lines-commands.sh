@@ -1,0 +1,6 @@
+tail -"${arg1}" "${sourceFile}"
+tail -"${arg1}" < "${sourceFile}"
+tail -n "${arg1}" "${sourceFile}"
+tail -n "${arg1}" < "${sourceFile}"
+tail -n"${arg1}" "${sourceFile}"
+tail -n"${arg1}" < "${sourceFile}"
