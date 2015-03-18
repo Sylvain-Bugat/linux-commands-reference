@@ -22,7 +22,7 @@ cat <file> | tr -s 'a'
 ```
 
 ## with sed command
-| Complexity::white_check_mark: | Efficiency::white_check_mark: |
+| Complexity::warning: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
 
 ```bash
