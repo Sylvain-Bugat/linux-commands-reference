@@ -11,7 +11,7 @@ fi
 . ../../common-libs/commands-lib.sh
 
 #Ignore comments with a 
-sed '/^[ 	]*#/d' < "${sourceFile}" > "${refTargetFile}"
+grep -v '^[ 	]*#' < "${sourceFile}" > "${refTargetFile}"
 
 #Test all commands
 testCommands "${selectedLines}"
