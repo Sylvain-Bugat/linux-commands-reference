@@ -1,5 +1,7 @@
 sed '/^[ 	]*#/d' "${sourceFile}"
 sed '/^[ 	]*#/d' < "${sourceFile}"
+sed '/^\\s*#/d' "${sourceFile}"
+sed '/^\\s*#/d' < "${sourceFile}"
 grep -v '^[ 	]*#' "${sourceFile}"
 grep -v '^[ 	]*#' < "${sourceFile}"
 grep -v '^\\s*#' "${sourceFile}"
