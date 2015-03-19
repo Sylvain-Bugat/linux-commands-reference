@@ -47,6 +47,28 @@ Input variant:
 egrep -v '^[ 	]*#' < <file>
 ```
 
+## with sed command
+| Complexity::white_check_mark: | Efficiency::white_check_mark: |
+| ---------- | ---------- |
+
+```bash
+sed '/^[ 	]*#/d' <file>
+```
+:warning: Space and tabulation caracters are between [ and ].
+
+Argument syntax variants:
+```bash
+sed '/^[ \\t]*#/d'  <file>
+sed '/^\\s*#/d' <file>
+sed '/^[[:space:]]*#/d' <file>
+sed '/^[[:blank:]]*#/d' <file>
+```
+
+Input variant:
+```bash
+sed '/^[ 	]*#/d' < <file>
+```
+
 ## with awk command
 | Complexity::warning: | Efficiency::white_check_mark: |
 | ---------- | ---------- |
