@@ -1,0 +1,63 @@
+# Ignore comments
+***
+Classic use-cases:  
+**Ignore # comments in a configuration file**  
+**Ignore comments marked with any character/string in a file read by a script**
+
+## with grep command
+| Complexity::white_check_mark: | Efficiency::white_check_mark: |
+| ---------- | ---------- |
+**The classic method**:
+```bash
+grep -v '^[ 	]*#' <file>
+```
+:warning: Space and tabulation characters are both present and between [ and ].
+
+Argument syntax variants:
+```bash
+grep -v '^\\s*#' <file>
+grep -v '^[[:space:]]*#' <file>
+```
+
+Input variant:
+```bash
+grep -v '^[ 	]*#' < <file>
+```
+
+## with egrep command
+| Complexity::white_check_mark: | Efficiency::white_check_mark: |
+| ---------- | ---------- |
+
+```bash
+egrep -v '^[ 	]*#' <file>
+```
+:warning: Space and tabulation caracters are between [ and ].
+
+Argument syntax variants:
+```bash
+egrep -v '^\\s*#' <file>
+egrep -v '^[[:space:]]*#' <file>
+```
+
+Input variant:
+```bash
+egrep -v '^[ 	]*#' < <file>
+```
+
+## with awk command
+| Complexity::warning: | Efficiency::white_check_mark: |
+| ---------- | ---------- |
+
+```bash
+awk '$0 !~ /^[ 	]*#/ { print $0 }' <file>
+```
+
+Argument syntax variant:
+```bash
+awk '{ if ( $0 !~ "^[ 	]*#" ) { print $0 } }' <file>
+```
+
+Input variant:
+```bash
+awk '$0 !~ /^[ 	]*#/ { print $0 }' < <file>
+```
