@@ -15,8 +15,10 @@ grep -v '^[ 	]*#' <file>
 
 Argument syntax variants:
 ```bash
+grep -v -P '^[ \t]*#' <file>
 grep -v '^\\s*#' <file>
 grep -v '^[[:space:]]*#' <file>
+grep -v '^[[:blank:]]*#' <file>
 ```
 
 Input variant:
@@ -37,6 +39,7 @@ Argument syntax variants:
 ```bash
 egrep -v '^\\s*#' <file>
 egrep -v '^[[:space:]]*#' <file>
+egrep -v '^[[:blank:]]*#' <file>
 ```
 
 Input variant:
