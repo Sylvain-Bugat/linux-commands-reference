@@ -2,6 +2,10 @@ wc -l < "${sourceFile}"
 wc -l "${sourceFile}" | cut -d ' ' -f 1
 wc -l "${sourceFile}" | cut -d' ' -f1
 wc -l "${sourceFile}" | awk '{print $1}'
+wc -l "${sourceFile}" | sed 's/ .*//'
+wc -l "${sourceFile}" | sed 's/ .*$//'
+wc -l "${sourceFile}" | sed -e 's/ .*//'
+wc -l "${sourceFile}" | sed -e 's/ .*$//'
 wc "${sourceFile}"  | tr -s ' ' | cut -d ' ' -f 2
 wc "${sourceFile}"  | tr -s ' ' | cut -d' ' -f2
 wc < "${sourceFile}"  | tr -s ' ' | cut -d ' ' -f 2
