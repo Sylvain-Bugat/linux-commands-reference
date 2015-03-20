@@ -1,4 +1,4 @@
-# Count lines of a files or any input
+# Count lines of a file or any input
 ***
 Classic use-cases:  
 **Count lines of a single file**  
@@ -11,7 +11,7 @@ Classic use-cases:
 ```bash
 wc -l <file> 
 ```
-:warning: The file is printed on the output by the `wc`s command, if only the counting is needed you can just redirect the input:
+:warning: The file is printed on the output by the `wc` command, if only the lines count is needed you can just redirect the input:
 ```bash
 wc -l < <file> 
 ```
@@ -99,15 +99,15 @@ egrep -c "" < <file>
 | ---------- | ---------- |
 
 ```bash
-egrep -c "" <file>
+perl -lne 'END { print $. }' <file>
 ```
 Argument syntax variants:
 ```bash
-egrep --count "" "${sourceFile}"
+perl -lne'END { print $. }' <file>
 ```
 Input variant:
 ```bash
-egrep -c "" < <file>
+perl -lne 'END { print $. }' < <file>
 ```
 
 ## with shell scripting
