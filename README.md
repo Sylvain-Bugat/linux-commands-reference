@@ -7,10 +7,8 @@ Some very useful linux commands sorted by categories:
 
 ## [Line selections](line-selections/README.md)
 
-## [Column selections](column-selections)
+## [File transformations](file-transformations/README.md)
 
-## [File transformations](file-transformations)
-
-## [File processing](file-processing)
+## [File processing](file-processing/README.md)
 
 ## [Security tests](security-tests)
