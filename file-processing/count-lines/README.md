@@ -54,6 +54,12 @@ sed -n '$=' < <file>
 ```bash
 awk 'END {print NR}' <file>
 ```
+
+Syntax variant:
+```bash
+awk '{ lineNumber++ } END {print lineNumber}'
+```
+
 Input variant:
 ```bash
 awk 'END {print NR}' < <file>
