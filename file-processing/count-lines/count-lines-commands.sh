@@ -16,6 +16,7 @@ wc "${sourceFile}"  | tr --squeeze-repeats ' ' | cut --delimiter=' ' --fields=2
 wc < "${sourceFile}"  | tr --squeeze-repeats ' ' | cut --delimiter=' ' --fields=2
 wc "${sourceFile}"  | awk '{print $1}'
 wc < "${sourceFile}"  | awk '{print $1}'
+cat "${sourceFile}" | wc -l
 sed -n '$=' "${sourceFile}"
 sed -n '$=' < "${sourceFile}"
 awk 'END {print NR}' "${sourceFile}"
