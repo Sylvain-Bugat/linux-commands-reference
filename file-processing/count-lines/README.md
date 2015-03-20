@@ -21,16 +21,13 @@ To suppress the file name, many unefficient variant exist:
 wc -l <file>  | cut -d ' ' -f 1
 wc -l <file>  | cut -d' ' -f1
 wc -l <file>  | awk '{print $1}'
+wc -l <file>   | sed 's/ .*//'
+wc -l <file>   | sed 's/ .*$//'
 wc <file>   | tr -s ' ' | cut -d ' ' -f 2
 wc <file>   | tr -s ' ' | cut -d' ' -f2
-wc < <file>   | tr -s ' ' | cut -d ' ' -f 2
-wc < <file>   | tr -s ' ' | cut -d' ' -f2
-wc <file>   | tr -s ' ' | awk '{print $1}'
-wc < <file>   | tr -s ' ' | awk '{print $1}'
-wc <file>   | tr --squeeze-repeats ' ' | cut --delimiter=' ' --fields=2
-wc < <file>   | tr --squeeze-repeats ' ' | cut --delimiter=' ' --fields=2
 wc <file>   | awk '{print $1}'
-wc < <file>   | awk '{print $1}'
+wc <file>   | tr --squeeze-repeats ' ' | cut --delimiter=' ' --fields=2
+wc <file>   | awk '{print $1}'
 ```
 In these command one or more process are created to execute these commands.
 
