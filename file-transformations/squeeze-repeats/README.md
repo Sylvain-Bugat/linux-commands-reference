@@ -8,15 +8,16 @@ Classic use-cases:
 | ---------- | ---------- |
 **The classic method**:  
 
-:warning: The ```tr``` command don't accept file arguments as input.
+:warning: The ```tr``` command don't accept file arguments as input, it only read standard input from ```<``` or ```|```.
 ```bash
 tr -s 'a' < <file>
 ```
 Argument syntax variants:
 ```bash
 tr -s'a' < <file>
+tr --squeeze-repeats 'a' < <file>
 ```
-Input variant:
+Unefficient input variant:
 ```bash
 cat <file> | tr -s 'a'
 ```
