@@ -30,10 +30,10 @@ function checkGeneratedFile {
 	cmp "${expectedFile}" "${generatedFile}"
 	if [[ ${?} -ne 0 ]]
 	then
-		echo -e " [\033[31mKO\033[0m]" 1>&2
+		echo -e " [\033[31mKO\033[0m]"
 		exit 1
 	else
-		echo -e " [\033[32mOK\033[0m]" 1>&2
+		echo -e " [\033[32mOK\033[0m]"
 	fi
 }
 
