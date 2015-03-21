@@ -90,5 +90,21 @@ function testCommands {
 		echo -n "${EXECUTING} ${executedCommand}"
 		eval "${line}" > "${targetFile}"
 		checkGeneratedFile "${executedCommand}" "${refTargetFile}" "${targetFile}"
+
+		#Test input after | with cat instead of '< "${sourceFile}"'
+		if [[ "${line}" = *'< "${sourceFile}"' ]]
+		then
+			typeset lineCat=$( echo "${line}" | sed 's/\(.*\)< "${sourceFile}"$/cat "${sourceFile}" | \1/' )
+			executedCommand=$( printExecutedCommand "${lineCat}" "${sourceFile}" ${*})
+			echo -n "${EXECUTING} ${executedCommand}"
+			eval "${lineCat}" > "${targetFile}"
+			checkGeneratedFile "${executedCommand}" "${refTargetFile}" "${targetFile}"
+
+			typeset lineCat=$( echo "${line}" | sed 's/\(.*\)< "${sourceFile}"$/cat < "${sourceFile}" | \1/' )
+			executedCommand=$( printExecutedCommand "${lineCat}" "${sourceFile}" ${*})
+			echo -n "${EXECUTING} ${executedCommand}"
+			eval "${lineCat}" > "${targetFile}"
+			checkGeneratedFile "${executedCommand}" "${refTargetFile}" "${targetFile}"
+		fi
 	done < "${commandsShell}"
 }
