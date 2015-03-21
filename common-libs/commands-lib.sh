@@ -27,7 +27,7 @@ function checkGeneratedFile {
 	typeset -r expectedFile="${2}"
 	typeset -r generatedFile="${3}"
 
-	cmp "${expectedFile}" "${generatedFile}"
+	cmp "${expectedFile}" "${generatedFile}" >/dev/null 2>&1
 	if [[ ${?} -ne 0 ]]
 	then
 		echo -e " [\033[31mKO\033[0m]"
@@ -56,7 +56,7 @@ function printExecutedCommand {
 	typeset -i argNumber=1
 	while [[ ! -z "${1}" ]]
 	do
-		executedCommand=$( echo "${executedCommand}" | sed -e 's/'\''"${arg'"${argNumber}"'}"'\''/'"${1}"'/g' -e 's/"${arg'"${argNumber}"'}"/'"${1}"'/g' -e 's/'\''${arg'"${argNumber}"'}'\''/'"${1}"'/g' )
+		executedCommand=$( echo "${executedCommand}" | sed -e 's/'\''"${arg'"${argNumber}"'}"'\''/'"${1}"'/g' -e 's/"${arg'"${argNumber}"'}"/'"${1}"'/g' -e 's/'\''${arg'"${argNumber}"'}'\''/'"${1}"'/g' -e 's/${arg'"${argNumber}"'}/'"${1}"'/g' )
 		shift
 		(( argNumber ++ ))
 	done
