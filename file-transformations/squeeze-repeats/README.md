@@ -27,11 +27,10 @@ cat <file> | tr -s 'a'
 | ---------- | ---------- |
 
 ```bash
-sed 's/aa*/a' <file>
+sed 's/aa*/a/g' <file>
 ```
 Argument syntax variants:
 ```bash
-sed 's/aa*/a/g' <file>
 sed -e 's/aa*/a/g' <file>
 sed -e's/aa*/a/g' <file>
 sed -r 's/a+/a/g' <file>
@@ -41,5 +40,5 @@ sed -r -e's/a+/a/g' <file>
 ```
 Input variant:
 ```bash
-sed 's/aa*/a' < <file>
+sed 's/aa*/a/g' < <file>
 ```
