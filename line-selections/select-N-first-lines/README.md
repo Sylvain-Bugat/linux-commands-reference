@@ -72,6 +72,18 @@ awk '{ if( NR <= 15 ) print $0 }' <file>
 ```
 All the content of the file is read by the `awk` command.
 
+## with perl command
+| Complexity::warning: | Efficiency::warning: |
+| ---------- | ---------- |
+All the content of the file is read by the `perl` command.
+```bash
+perl -ne '1..15 and print' <file>
+```
+Input variant:
+```bash
+perl -ne '1..15 and print' < <file>
+```
+
 ## with shell scripting
 | Complexity::warning: | Efficiency::warning: |
 | ---------- | ---------- |
