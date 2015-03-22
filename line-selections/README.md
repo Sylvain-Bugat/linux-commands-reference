@@ -10,3 +10,4 @@ Line selections commands.
 
 ## [select lines N to EOF](select-lines-N-to-EOF/README.md)
 
+## [select lines N and M](select-lines-N-and-M/README.md)
