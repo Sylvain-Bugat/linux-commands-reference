@@ -22,9 +22,10 @@ Input variant:
 head -n 15 < <file>
 ```
 
-Unefficient variant:
+Unefficient variants:
 ```bash
 cat <file> | head -n 15
+cat < <file> | head -n 15
 ```
 All the content of the file is read and passed into the pipe **|** and another process is created for the `cat` command.
 
