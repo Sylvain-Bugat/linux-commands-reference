@@ -14,7 +14,7 @@ tail -n 15 <file>
 Argument syntax variants:
 ```bash
 tail -15 <file>
-head -n15 <file>
+tail -n15 <file>
 ```
 Input variant:
 ```bash
