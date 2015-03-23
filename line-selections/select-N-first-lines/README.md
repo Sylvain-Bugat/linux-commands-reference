@@ -27,7 +27,7 @@ Unefficient variants:
 cat <file> | head -n 15
 cat < <file> | head -n 15
 ```
-All the content of the file is read and passed into the pipe **|** and another process is created for the `cat` command.
+More than needed lines can be read be the `cat` command and passed into the pipe **|** and another process is created for the `cat` command. The SIGPIPE (Broken pipe) signal is send to the `cat` command when the `head` have exited.
 
 ## with sed command
 | Complexity::warning: | Efficiency::white_check_mark: |
