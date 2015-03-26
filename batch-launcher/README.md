@@ -12,14 +12,20 @@ Example:
 :warning: UTF BOM are forbidden in shell script because they insert caracters before the shebang!  
 ```0xEF 0xBB 0xBF!/bin/bash``` will not be executed because of 3 BOM characters (UTF-8 hexadecimal example).
 
+Example of error obtained in the case of a Windows format script file:
+```bash
+-bash: ./windows-format-launcher.sh : /bin/bash^M : bad interpreter: No such file or directory
+```
+
 ## Using absolute path
 **The classic method**:
 ```bash
 #!/bin/bash
 ```
-Options can be passed to the used command:
+:warning: only one option or goup of options in a single block can be passed to the used command:
 ```bash
 #!/bin/bash -i
+#!/bin/bash -ix
 ```
 
 Shebang examples:
