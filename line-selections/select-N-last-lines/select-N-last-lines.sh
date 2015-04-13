@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #Check arguments
-if [[ "${#}" -ge 1 && "${#1}" -ne 1 ]]
+if [[ "${#}" -ge 1 && "${1}" != [0-9]* ]]
 then
 	echo "Usage: $0 <number of lines>"
 	exit 2
