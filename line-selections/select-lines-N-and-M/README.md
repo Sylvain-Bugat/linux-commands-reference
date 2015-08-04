@@ -1,8 +1,8 @@
 # Select the lines N and M in a file
 ***
 Classic use-cases:  
-**Get some fixed lines part of a file**  
-**Get only some lines a formated header ( vmstat, iostat, etc.)**
+**Get some fixed lines part of a file header**  
+**Get only some lines of a formated header ( vmstat, iostat, etc.)**
 
 ## with sed
 | Complexity::white_check_mark: | Efficiency::white_check_mark: |
