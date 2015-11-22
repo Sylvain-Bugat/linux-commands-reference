@@ -39,6 +39,28 @@ function checkGeneratedFile {
 
 #------------------------------------------------------
 #
+# Check the command return, must be 0 (OK)
+#
+# $1 -> executed command
+# $2 -> command return
+#
+#------------------------------------------------------
+function checkCommandReturn {
+
+        typeset -r executedCommand="${1}"
+        typeset -r commandReturn="${2}"
+
+        if [[ ${commandReturn} -ne 0 ]]
+        then
+                echo -e " [\033[31mKO\033[0m]"
+                exit 1
+        else
+                echo -e " [\033[32mOK\033[0m]"
+        fi
+}
+
+#------------------------------------------------------
+#
 # Print the executed command after arguments replacements
 #
 # $1 -> raw executed command
@@ -108,3 +130,52 @@ function testCommands {
 		fi
 	done < "${commandsShell}"
 }
+
+#------------------------------------------------------
+#
+# Test all commands return un the associated -commands.sh file
+#
+# $1... -> commands arguments
+#
+#------------------------------------------------------
+function testCommandsReturn {
+
+        typeset -r commandsShell=$( dirname "${0}" )/$( basename "${0}" | sed 's/.sh$/-commands.sh/' )
+
+        #Map arguements as argX
+        typeset -i argNumber=1
+        for arg in ${*}
+        do
+                eval arg${argNumber}="'${arg}'"
+                (( argNumber ++ ))
+        done
+
+        #List one-line commands to execute and test
+        while read line
+        do
+                executedCommand=$( printExecutedCommand "${line}" "${sourceFile}" ${*})
+                echo -n "${EXECUTING} ${executedCommand}"
+                eval "${line}" > "${targetFile}"
+                commandReturn=${?}
+		checkCommandReturn "${executedCommand}" "${commandReturn}" 
+
+                #Test input after | with cat instead of '< "${sourceFile}"'
+                if [[ "${line}" = *'< "${sourceFile}"' ]]
+                then
+                        typeset lineCat=$( echo "${line}" | sed 's/\(.*\)< "${sourceFile}"$/cat "${sourceFile}" | \1/' )
+                        executedCommand=$( printExecutedCommand "${lineCat}" "${sourceFile}" ${*})
+                        echo -n "${EXECUTING} ${executedCommand}"
+                        eval "${lineCat}" > "${targetFile}"
+	                commandReturn=${?}
+        	        checkCommandReturn "${executedCommand}" "${commandReturn}"
+
+                        typeset lineCat=$( echo "${line}" | sed 's/\(.*\)< "${sourceFile}"$/cat < "${sourceFile}" | \1/' )
+                        executedCommand=$( printExecutedCommand "${lineCat}" "${sourceFile}" ${*})
+                        echo -n "${EXECUTING} ${executedCommand}"
+                        eval "${lineCat}" > "${targetFile}"
+                        commandReturn=${?}
+                	checkCommandReturn "${executedCommand}" "${commandReturn}"
+                fi
+        done < "${commandsShell}"
+}
+
