@@ -10,8 +10,5 @@ fi
 #Source commands library
 . ../../common-libs/commands-lib.sh
 
-#make a reference file based on the most common command
-test -f "${sourceFile}" ; echo $? > "${refTargetFile}"
-
 #Test all commands
-testCommands "${selectedLines}"
+testCommandsReturn "${selectedLines}"
